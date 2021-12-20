@@ -2,7 +2,7 @@ import { useState } from "react";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory, useParams } from "react-router-dom";
 import { format, addDays, parse } from "date-fns";
-import { config } from "globalConfig";
+import config from "globalConfig.json";
 import taskStorage from "storageService";
 import ReactDatePicker from "react-datepicker";
 

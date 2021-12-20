@@ -1,5 +1,5 @@
 import { parse, compareAsc } from "date-fns";
-import { config } from "globalConfig";
+import config from "globalConfig.json";
 import { v4 } from "uuid";
 
 const taskStorage = (function () {

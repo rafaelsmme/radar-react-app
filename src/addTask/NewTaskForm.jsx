@@ -3,7 +3,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useHistory } from "react-router-dom";
 import { format } from "date-fns";
-import { config } from "globalConfig";
+import config from "globalConfig.json";
 import addDays from "date-fns/addDays";
 
 function NewTaskForm({ onSubmit }) {
