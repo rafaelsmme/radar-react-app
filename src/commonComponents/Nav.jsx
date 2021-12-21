@@ -28,7 +28,7 @@ function Nav({ title, disableAdd }) {
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-            <li className="nav-item text-light">{config.apiUrl}</li>
+            <li className="nav-item text-light"></li>
           </ul>
         </div>
         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
