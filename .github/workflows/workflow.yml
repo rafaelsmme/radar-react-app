@@ -13,6 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install
+      - run: jq '.apiUrl = "${{ secrets.AWS_API_GATEWAY_URL }}"' src/globalConfig.json
       - run: npm run build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
