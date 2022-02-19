@@ -6,6 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import config from "globalConfig.json";
+const BASE_URL = process.env.REACT_APP_TEST_STRING;
 
 function Nav({ title, disableAdd }) {
   return (
@@ -16,7 +17,7 @@ function Nav({ title, disableAdd }) {
           {title}
         </Link>
         <button
-          class="navbar-toggler"
+          className="navbar-toggler"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#navbarSupportedContent"
@@ -24,9 +25,9 @@ function Nav({ title, disableAdd }) {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item text-light"></li>
           </ul>

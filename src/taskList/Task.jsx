@@ -1,10 +1,10 @@
-import { faEllipsisV } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
+import { format } from "date-fns";
+import config from "globalConfig.json";
 
 function Task({ task }) {
   return (
-    <div className="card">
+    <div className="card mb-3">
       <h5 className="card-header">
         <Link to={`/edit/${task.id}`}>{task.label}</Link>
       </h5>
@@ -13,8 +13,14 @@ function Task({ task }) {
           {" "}
           Every {task.period} days
         </h6>
-        <h6>{`Last: ${task.last || task.startDate}`}</h6>
-        <h6>{`Next: ${task.next}`}</h6>
+        <h6>{`Last: ${format(
+          new Date(task.last || task.startDate),
+          config.internalDateFormat
+        )}`}</h6>
+        <h6>{`Next: ${format(
+          new Date(task.next),
+          config.internalDateFormat
+        )}`}</h6>
       </div>
     </div>
   );

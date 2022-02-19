@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import config from "globalConfig.json";
 import addDays from "date-fns/addDays";
@@ -10,23 +10,19 @@ function NewTaskForm({ onSubmit }) {
   const [label, setLabel] = useState("");
   const [period, setPeriod] = useState(7);
   const [startDate, setStartDate] = useState(new Date());
-  const history = useHistory();
-
-  const changeStartDateChangeHandler = (date) => {
-    setStartDate(date);
-  };
+  const navigate = useNavigate();
 
   const formSubmitHandler = (event) => {
     event.preventDefault();
     const newTask = {
       label,
       period,
-      startDate: format(startDate, config.dateFormat),
+      startDate: format(startDate, config.externalDateFormat),
       last: null,
-      next: format(addDays(startDate, period), config.dateFormat),
+      next: format(addDays(startDate, period), config.externalDateFormat),
     };
     onSubmit(newTask);
-    history.push("/");
+    navigate("/");
   };
 
   return (
@@ -72,8 +68,8 @@ function NewTaskForm({ onSubmit }) {
               <ReactDatePicker
                 selected={startDate}
                 className="form-control"
-                dateFormat={config.dateFormat}
-                onChange={changeStartDateChangeHandler}
+                dateFormat={config.internalDateFormat}
+                onChange={(date) => setStartDate(date)}
                 required
               />
               <div

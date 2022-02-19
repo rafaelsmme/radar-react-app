@@ -1,4 +1,4 @@
 {
-  "dateFormat": "dd/MM/yyyy",
-  "apiUrl": "uahwuahwuwh"
+  "internalDateFormat": "dd/MM/yyyy",
+  "externalDateFormat": "yyyy-MM-dd"
 }
