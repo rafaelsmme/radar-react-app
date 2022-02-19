@@ -49,7 +49,7 @@ function EditTaskForm({ onSave, onDelete, onAddExec }) {
   const formDeleteHandler = async (event) => {
     event.preventDefault();
     await onDelete(id);
-    history.push("/");
+    navigate("/");
   };
 
   const addExecution = async (event) => {

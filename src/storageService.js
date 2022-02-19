@@ -4,7 +4,7 @@ const API_URL = process.env.REACT_APP_API_URL;
 
 const taskStorage = (function () {
   // let tasks = JSON.parse(localStorage.getItem("tasks")) || {};
-  // let executions = JSON.parse(localStorage.getItem("executions")) || {};
+  let executions = JSON.parse(localStorage.getItem("executions")) || {};
 
   // const addask = (newTask) => {
   //   if (!newTask.id) {
