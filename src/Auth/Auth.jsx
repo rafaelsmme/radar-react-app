@@ -1,26 +1,22 @@
 import { createContext, useContext, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { signIn as signInService } from "./authService";
+import { getSession, authenticate, logout } from "./authService";
 
 export const AuthContext = createContext({ logged: false });
 
 export const AuthProvider = ({ children }) => {
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(() => getSession());
 
-  const signIn = (password, callback) => {
-    console.log("password", password);
-    const logged = signInService(password);
-    console.log("logged", logged);
-    setLoggedIn(logged);
-    callback();
+  const signIn = async (email, password) => {
+    await authenticate(email, password).then(() => setIsLoggedIn(true));
   };
 
-  const signOut = (callback) => {
-    setLoggedIn(false);
-    callback();
+  const signOut = () => {
+    logout();
+    setIsLoggedIn(null);
   };
 
-  const value = { loggedIn, signIn, signOut };
+  const value = { isLoggedIn, signIn, signOut };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
@@ -30,13 +26,11 @@ export const useAuth = () => {
 };
 
 export const RequireAuth = ({ children }) => {
-  let auth = useAuth();
-  let location = useLocation();
+  const { isLoggedIn } = useAuth();
+  const location = useLocation();
 
-  console.log("auth.loggedIn", auth.loggedIn);
-  if (!auth.loggedIn) {
+  if (!isLoggedIn)
     return <Navigate to="/login" state={{ from: location }} replace />;
-  }
 
   return children;
 };

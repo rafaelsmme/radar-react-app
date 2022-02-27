@@ -26,7 +26,7 @@ function NewTaskForm({ onSubmit }) {
   };
 
   return (
-    <div className="col-4">
+    <div className="col-sm-12 col-md-4">
       <div className="card">
         <form onSubmit={formSubmitHandler}>
           <h4 className="card-header">New Task</h4>

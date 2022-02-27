@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useLocation } from "react-router-dom";
 import "bootstrap-css-only";
 import Nav from "commonComponents/Nav";
 import NewTaskForm from "addTask/NewTaskForm";
 import EditTaskForm from "editTask/EditTaskForm";
 import taskStorage from "storageService";
 import TaskList from "taskList/TaskList";
+import { useAuth } from "Auth/Auth";
 
 function App() {
   const [tasks, setTasks] = useState([]);
+  const auth = useAuth();
+  let location = useLocation();
+
+  // if (!auth.isLoggedIn) {
+  //   return <Navigate to="/login" state={{ from: location }} replace />;
+  // }
 
   useEffect(async () => {
     const result = await taskStorage.getAllTasks();
@@ -39,7 +46,6 @@ function App() {
     console.log("update", t);
     setTasks([...t]);
   };
-
   return (
     <>
       <Nav title={"Task Radar"} disableAdd={false} />

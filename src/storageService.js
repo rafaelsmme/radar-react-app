@@ -1,10 +1,18 @@
 import axios from "axios";
 import { v4 } from "uuid";
 const API_URL = process.env.REACT_APP_API_URL;
+import Pool from "./Auth/UserPool";
 
 const taskStorage = (function () {
   // let tasks = JSON.parse(localStorage.getItem("tasks")) || {};
   let executions = JSON.parse(localStorage.getItem("executions")) || {};
+
+  axios.interceptors.request.use(async (config) => {
+    const token = await getSessionToken();
+    config.headers.Authorization = token;
+
+    return config;
+  });
 
   // const addask = (newTask) => {
   //   if (!newTask.id) {
@@ -51,6 +59,23 @@ const taskStorage = (function () {
   //   deleteTask,
   //   addExec,
   // };
+
+  const getSessionToken = async () => {
+    return await new Promise((resolve, reject) => {
+      const user = Pool.getCurrentUser();
+      if (user) {
+        user.getSession((err, session) => {
+          if (err) {
+            reject();
+          } else {
+            resolve(session.accessToken.jwtToken);
+          }
+        });
+      } else {
+        reject();
+      }
+    });
+  };
 
   const addTask = async (task) => {
     task.id = v4();

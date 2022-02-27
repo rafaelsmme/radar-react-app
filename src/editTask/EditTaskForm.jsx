@@ -21,7 +21,6 @@ function EditTaskForm({ onSave, onDelete, onAddExec }) {
 
   useEffect(async () => {
     const t = await taskStorage.getTask(id);
-    console.log(t);
     setTask({ ...t });
     setLabel(t.label);
     setPeriod(t.period);
@@ -35,12 +34,10 @@ function EditTaskForm({ onSave, onDelete, onAddExec }) {
     const newTask = {
       label,
       period,
-      // last: format(last || startDate, config.externalDateFormat),
       next: format(
         addDays(last || startDate, period),
         config.externalDateFormat
       ),
-      // startDate: format(startDate: )
     };
     await onSave({ ...task, ...newTask });
     navigate("/");
@@ -67,7 +64,7 @@ function EditTaskForm({ onSave, onDelete, onAddExec }) {
   };
 
   return (
-    <div className="col-4">
+    <div className="col-sm-12 col-md-4">
       <div className="card">
         <form onSubmit={formSubmitHandler}>
           <h4 className="card-header">Edit Task</h4>
