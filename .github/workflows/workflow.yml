@@ -13,9 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v1
       - run: npm install
-      - name: Update globalConfgig
-        run: |
-          jq '.apiUrl = "${{ secrets.AWS_API_GATEWAY_URL }}"' src/globalConfig.json > config.tmp && mv -f config.tmp src/globalConfig.json
+      - name: Make env file
+        uses: SpicyPizza/create-envfile@v1.3
+        with:
+          REACT_APP_API_URL: ${{ secrets.AWS_API_GATEWAY_URL }}
+          REACT_APP_COGNITO_POOL_ID: ${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }}
+          REACT_APP_COGNITO_APP_CLIENT_ID: ${{ secrets.REACT_APP_COGNITO_APP_CLIENT_ID }}
+      # - name: Update globalConfgig
+      #   run: |
+      #     jq '.apiUrl = "${{ secrets.AWS_API_GATEWAY_URL }}"' src/globalConfig.json > config.tmp && mv -f config.tmp src/globalConfig.json
       - run: npm run build
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
