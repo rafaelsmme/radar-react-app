@@ -1,7 +1,9 @@
 import axios from "axios";
 import { v4 } from "uuid";
-const API_URL = process.env.REACT_APP_API_URL;
+import config from "globalConfig.json";
 import Pool from "./Auth/UserPool";
+
+const API_URL = config.apiUrl;
 
 const taskStorage = (function () {
   // let tasks = JSON.parse(localStorage.getItem("tasks")) || {};
@@ -13,52 +15,6 @@ const taskStorage = (function () {
 
     return config;
   });
-
-  // const addask = (newTask) => {
-  //   if (!newTask.id) {
-  //     newTask.id = v4();
-  //   }
-  //   tasks[newTask.id] = { ...newTask };
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // };
-
-  // const sortTasks = () => {
-  //   tasks.sort();
-  // };
-
-  // const getTask = (taskId) => {
-  //   return tasks[taskId];
-  // };
-
-  // const getAllTasks = () => {
-  //   return Object.values(tasks).sort((taskA, taskB) =>
-  //     compareAsc(
-  //       parse(taskA.next, config.dateFormat, new Date()),
-  //       parse(taskB.next, config.dateFormat, new Date())
-  //     )
-  //   );
-  // };
-
-  // const deleteTask = (taskId) => {
-  //   delete tasks[taskId];
-  //   delete executions[taskId];
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  //   localStorage.setItem("executions", JSON.stringify(executions));
-  // };
-
-  // const addExec = (taskId, nextExec) => {
-  //   if (!executions[taskId]) executions[taskId] = [];
-  //   executions[taskId].push(nextExec);
-  //   localStorage.setItem("executions", JSON.stringify(executions));
-  // };
-
-  // return {
-  //   getAllTasks,
-  //   addTask,
-  //   getTask,
-  //   deleteTask,
-  //   addExec,
-  // };
 
   const getSessionToken = async () => {
     return await new Promise((resolve, reject) => {
