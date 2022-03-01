@@ -2,7 +2,6 @@ import axios from "axios";
 import { v4 } from "uuid";
 import config from "globalConfig.json";
 import Pool from "./Auth/UserPool";
-
 const API_URL = config.apiUrl;
 
 const taskStorage = (function () {
